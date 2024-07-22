@@ -13,8 +13,9 @@ const getPessoaDB = async () => {
 const addPessoaDB = async (body) => {
   try{
     const { nome, cpf } = body;
+    console.log(nome + " " + cpf)
     const results = await pool.query(`INSERT INTO pessoa (nome, cpf) VALUES ($1, $2)
-       returning id, nome, cpf`[nome, cpf])
+       returning id, nome, cpf`,[nome, cpf])
     const pessoa = results.rows[0]
     return new Pessoa(pessoa.id, pessoa.nome, pessoa.cpf)
   }catch(err){
@@ -53,7 +54,7 @@ const deletePessoaDB = async ( id ) => {
 
 const getPessoaPorIdDB = async ( id ) => {
   try {
-    const results = await pool.query(`SELECT * FROM pessoa WHERE id = $1`[id])
+    const results = await pool.query(`SELECT * FROM pessoa WHERE id = $1`,[id])
     if (results.rowCount == 0) {
       throw `Não existe um registro de pessoa com id ${id}`;
   } else{

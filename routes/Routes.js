@@ -1,11 +1,11 @@
 const { Router } = require('express');
 
-const { routePessoa } = require('./RoutePessoa')
-const { routePet} = require ('./RoutePet')
+const { routesPessoa } = require('./RoutePessoa')
+const { routesPet} = require ('./RoutePet')
 
 const routes = new Router();
 
-routes.use(routePessoa)
-routes.use(routePet)
+routes.use(routesPessoa)
+routes.use(routesPet)
 
 module.exports = routes;

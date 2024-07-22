@@ -9,9 +9,7 @@ const {
 const getPet = async (request, response) => {
   await getPetDB()
     .then((data) => response.status(200).json(data))
-    .catch(
-      (err) => response.status(400),
-      json({
+    .catch( err => response.status(400).json({
         status: "error",
         message: "Erro ao buscar as pet: " + err,
       })
@@ -24,7 +22,7 @@ const addPet = async (request, response) => {
       response.status(200).json({
         status: "success",
         message: "Pet foi criada",
-        object: data,
+        objeto: data,
       })
     )
     .catch((err) =>

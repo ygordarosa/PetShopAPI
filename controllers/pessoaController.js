@@ -10,7 +10,7 @@ const getPessoa = async (request, response) => {
   await getPessoaDB()
     .then((data) => response.status(200).json(data))
     .catch(
-      (err) => response.status(400),
+      err => response.status(400).
       json({
         status: "error",
         message: "Erro ao buscar as pessoa: " + err,
@@ -24,7 +24,7 @@ const addPessoa = async (request, response) => {
       response.status(200).json({
         status: "success",
         message: "Pessoa foi criada",
-        object: data,
+        objeto: data,
       })
     )
     .catch((err) =>

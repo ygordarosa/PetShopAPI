@@ -15,7 +15,7 @@ if (isProduction){
         user : "postgres",
         password : "postgres",
         host : "localhost",
-        database : "eshoppw",
+        database : "petshop",
         port : 5432
     })
 }

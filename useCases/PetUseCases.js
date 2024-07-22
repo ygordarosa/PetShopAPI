@@ -14,7 +14,7 @@ const addPetDB = async (body) => {
   try{
     const { nome, dono } = body;
     const results = await pool.query(`INSERT INTO pet (nome, dono) VALUES ($1, $2)
-       returning id, nome, dono`[nome, dono])
+       returning id, nome, dono`, [nome, dono])
     const pet = results.rows[0]
     return new Pet(pet.id, pet.nome, pet.dono)
   }catch(err){
@@ -53,7 +53,7 @@ const deletePetDB = async ( id ) => {
 
 const getPetPorIdDB = async ( id ) => {
   try {
-    const results = await pool.query(`SELECT * FROM pet WHERE id = $1`[id])
+    const results = await pool.query(`SELECT * FROM pet WHERE id = $1`,[id])
     if (results.rowCount == 0) {
       throw `Não existe um registro de pet com id ${id}`;
   } else{
