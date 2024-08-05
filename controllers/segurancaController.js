@@ -1,12 +1,12 @@
 
-const { autenticaUsuarioDB } = require('../useCases/segurancaUseCases');
+const { autenticaContaDB } = require('../useCases/segurancaUseCases');
 require("dotenv-safe").config();
 const jwt = require('jsonwebtoken');
 
 const login = async (request, response) => {
-    await autenticaUsuarioDB(request.body)
-        .then(usuario => {
-            const token = jwt.sign({ usuario }, process.env.SECRET, {
+    await autenticaContaDB(request.body)
+        .then(conta => {
+            const token = jwt.sign({ conta }, process.env.SECRET, {
                 expiresIn: 300 //expira em 5 min
             })
             return response.json({ auth: true, token: token })
@@ -22,8 +22,8 @@ function verificaJWT(request, response, next) {
     jwt.verify(token, process.env.SECRET, function (err, decoded) {
         if (err) return response.status(401).json({ auth: false, message: 'Erro ao autenticar o token.' });
         // Se o token for válido, salva no request para uso posterior
-        console.log("Usuario: " + JSON.stringify(decoded.usuario));
-        request.usuario = decoded.usuario;
+        console.log("Conta: " + JSON.stringify(decoded.conta));
+        request.conta = decoded.conta;
         next();
     });
 }
