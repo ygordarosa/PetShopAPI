@@ -1,17 +1,17 @@
 const { Router } = require('express')
 const { getPessoa, addPessoa, updatePessoa, 
   deletePessoa, getPessoaPorId } = require('../controllers/pessoaController')
-
-  const routesPessoa = new Router()
+const { verificaJWT } = require('../controllers/segurancaController')
+const routesPessoa = new Router()
 
 routesPessoa.route('/pessoa')
             .get(getPessoa)
-            .post(addPessoa)
-            .put(updatePessoa)
+            .post(verificaJWT, addPessoa)
+            .put(verificaJWT, updatePessoa)
 
 routesPessoa.route('/pessoa/:id')
-            .get(getPessoaPorId)
-            .delete(deletePessoa)
+            .get(verificaJWT, getPessoaPorId)
+            .delete(verificaJWT, deletePessoa)
 
 
 module.exports = { routesPessoa }
